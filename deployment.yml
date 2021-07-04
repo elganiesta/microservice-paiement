@@ -1,35 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mpaiements
+spec:
+  selector:
+    app: microservice-paiements
+  ports:
+    - protocol: TCP
+      port: 9003
+      targetPort: 9003
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: paiements-deployment
+  name: paiements-deploy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mpaiements
+      app: microservice-paiements
   template:
     metadata:
       labels:
-        app: mpaiements
+        app: microservice-paiements
     spec:
       containers:
-      - name: mpaiements
-        image: elganiesta/mpaiements:1
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 9003
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mpaiements-service
-spec:
-  selector:
-    app: mpaiements
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 9003
+        - name: microservice-paiements
+          image: elganiesta/mpaiements:1
+          ports:
+            - name: http
+              containerPort: 9003
