@@ -36,6 +36,15 @@ pipeline{
         stage("Kubernetes deploy"){
             steps{
                 echo "======== Kubernetes deploy ========"
+                // def remote = [:]
+                // remote.name = '<name>'
+                // remote.host = '<host>'
+                // remote.user = '<user>'
+                // remote.password = '<password>'
+                // remote.allowAnyHosts = true
+
+                // sshPut remote: remote, from: 'deployment.yml', into: '.'
+                // sshCommand remote: remote, command: "kubectl apply -f deployment.yml"
             }
         }
     }
